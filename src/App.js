@@ -6,20 +6,44 @@ class App extends Component {
 
   state = {
     words: '',
-    images: []
+    images: [],
+    page: ''
   }
 
-  prevpage = () => {
+  prevPage = () => {
+    console.log("Prev");
+    let page = this.state.page;
+
+    if(page === 1) return null;
+
+    page --
+    
+   this.setState({
+     page
+  }, () => {
+    this.consultApi();
+  });
 
   }
 
-  nextpage = () => {
+  nextPage = () => {
+    console.log("Next")
+    let page = this.state.page;
+
+    page ++
+    
+   this.setState({
+     page
+   }, () => {
+    this.consultApi();
+  });
 
   }
 
   consultApi = () => {
     const word = this.state.words;
-    const url = `https://pixabay.com/api/?key=21699074-abf7b4c7bfe9ac3ab0e58bbd7&q=${word}`;
+    const page = this.state.page;
+    const url = `https://pixabay.com/api/?key=21699074-abf7b4c7bfe9ac3ab0e58bbd7&q=${word}&per_page=20&${page}`;
     
     fetch(url)
     .then(response => response.json())
@@ -29,7 +53,8 @@ class App extends Component {
 
   dataSearched = (words) => {
     this.setState({
-      words
+      words : words,
+      page : 1
     }, () => {
       this.consultApi();
     })
@@ -45,10 +70,10 @@ class App extends Component {
         />
         </div>
         <div className="row justify-content-center">
-        <Results
-        images={this.state.images}
-        prevpage = {this.prevpage}
-        nextpage = {this.nextpage}
+         <Results
+          images={this.state.images}
+          prevPage = {this.prevPage}
+          nextPage = {this.nextPage}
         />
         </div>
         
