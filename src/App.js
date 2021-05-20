@@ -10,40 +10,46 @@ class App extends Component {
     page: ''
   }
 
+  scroll = () => {
+    const element = document.querySelector('.jumbotron');
+    element.scrollIntoView('smooth', 'start');
+  }
+
   prevPage = () => {
-    console.log("Prev");
+   
     let page = this.state.page;
 
     if(page === 1) return null;
 
-    page --
+    page-- ;
     
    this.setState({
      page
   }, () => {
     this.consultApi();
   });
-
+  
   }
 
   nextPage = () => {
-    console.log("Next")
+   
     let page = this.state.page;
-
-    page ++
+    
+    page++ ;
     
    this.setState({
      page
    }, () => {
     this.consultApi();
+    this.scroll();
   });
-
+  
   }
 
   consultApi = () => {
-    const word = this.state.words;
+    const words = this.state.words;
     const page = this.state.page;
-    const url = `https://pixabay.com/api/?key=21699074-abf7b4c7bfe9ac3ab0e58bbd7&q=${word}&per_page=20&${page}`;
+    const url = `https://pixabay.com/api/?key=21699074-abf7b4c7bfe9ac3ab0e58bbd7&q=${words}&per_page=20&page=${page}`;
     
     fetch(url)
     .then(response => response.json())
