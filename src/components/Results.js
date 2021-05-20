@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Image from './Image';
+import Pagination from "./Pagination";
 
 class Results extends Component {
 
@@ -20,6 +21,10 @@ class Results extends Component {
                     />
                 ))}
             </div>
+            <Pagination
+            prevpage = {this.props.prevpage}
+            nextpage = {this.props.nextpage}
+            />
             </React.Fragment>
         );
     }

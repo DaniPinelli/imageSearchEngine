@@ -9,6 +9,14 @@ class App extends Component {
     images: []
   }
 
+  prevpage = () => {
+
+  }
+
+  nextpage = () => {
+
+  }
+
   consultApi = () => {
     const word = this.state.words;
     const url = `https://pixabay.com/api/?key=21699074-abf7b4c7bfe9ac3ab0e58bbd7&q=${word}`;
@@ -36,9 +44,14 @@ class App extends Component {
         dataSearched= {this.dataSearched}
         />
         </div>
+        <div className="row justify-content-center">
         <Results
         images={this.state.images}
+        prevpage = {this.prevpage}
+        nextpage = {this.nextpage}
         />
+        </div>
+        
       </div>
     );
   }
